@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlinapp.databinding.ActivityMainBinding
+import com.example.kotlinapp.model.Note
 import com.example.kotlinapp.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -19,11 +20,22 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(ui.toolbar)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        adapter = MainAdapter()
+
+        adapter = MainAdapter(object : OnItemClickListener {
+            override fun onItemClick(note: Note) {
+                openNoteScreen(note)
+            }
+        })
         ui.mainRecycler.adapter = adapter
 
         viewModel.viewState().observe(this, Observer<MainViewState> { state ->
             state?.let { adapter.notes = state.notes }
         })
+
+        ui.fab.setOnClickListener { openNoteScreen() }
+    }
+
+    private fun openNoteScreen(note: Note? = null) {
+        startActivity(NoteActivity.getStartIntent(this, note))
     }
 }

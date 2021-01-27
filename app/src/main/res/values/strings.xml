@@ -3,4 +3,5 @@
     <string name="note_title">Geekbrains + Kotlin forever</string>
     <string name="note_body">Я Kotlin бы выучил только за то, что на нем разрабатывал Вортон!</string>
     <string name="app_title">GeekBrains Notes</string>
+    <string name="new_note_title">New note</string>
 </resources>
