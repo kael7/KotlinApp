@@ -1,11 +1,10 @@
 package com.example.kotlinapp.viewmodel
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.example.kotlinapp.model.Note
 import com.example.kotlinapp.model.NoteResult
 import com.example.kotlinapp.model.Repository
-import com.example.kotlinapp.ui.NoteViewState
+import com.example.kotlinapp.ui.states.NoteViewState
 
 class NoteViewModel(val repository: Repository = Repository) :
     BaseViewModel<Note?, NoteViewState>() {
@@ -29,9 +28,11 @@ class NoteViewModel(val repository: Repository = Repository) :
 
                 when (t) {
                     is NoteResult.Success<*> ->
-                        viewStateLiveData.value = NoteViewState(note = t.data as? Note)
+                        viewStateLiveData.value =
+                            NoteViewState(note = t.data as? Note)
                     is NoteResult.Error ->
-                        viewStateLiveData.value = NoteViewState(error = t.error)
+                        viewStateLiveData.value =
+                            NoteViewState(error = t.error)
                 }
             }
         })

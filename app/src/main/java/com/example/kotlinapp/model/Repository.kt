@@ -1,13 +1,14 @@
 package com.example.kotlinapp.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import java.util.*
+import com.example.kotlinapp.model.providers.FireStoreProvider
+import com.example.kotlinapp.model.providers.RemoteDataProvider
 
 object Repository {
-    private val remoteProvider: RemoteDataProvider = FireStoreProvider()
+    private val remoteProvider: RemoteDataProvider =
+        FireStoreProvider()
 
     fun getNotes() = remoteProvider.subscribeToAllNotes()
     fun saveNote(note: Note) = remoteProvider.saveNote(note)
     fun getNoteById(id: String) = remoteProvider.getNoteById(id)
+    fun getCurrentUser() = remoteProvider.getCurrentUser()
 }

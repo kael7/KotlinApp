@@ -3,7 +3,7 @@ package com.example.kotlinapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.kotlinapp.ui.BaseViewState
+import com.example.kotlinapp.ui.states.BaseViewState
 
 open class BaseViewModel<T, S : BaseViewState<T>> : ViewModel() {
 

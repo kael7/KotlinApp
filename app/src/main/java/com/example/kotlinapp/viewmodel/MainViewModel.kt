@@ -1,13 +1,10 @@
 package com.example.kotlinapp.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.example.kotlinapp.model.Note
 import com.example.kotlinapp.model.NoteResult
 import com.example.kotlinapp.model.Repository
-import com.example.kotlinapp.ui.MainViewState
+import com.example.kotlinapp.ui.states.MainViewState
 
 class MainViewModel(val repository: Repository = Repository) :
     BaseViewModel<List<Note>?, MainViewState>() {
@@ -19,10 +16,12 @@ class MainViewModel(val repository: Repository = Repository) :
 
             when (t) {
                 is NoteResult.Success<*> -> {
-                    viewStateLiveData.value = MainViewState(notes = t.data as? List<Note>)
+                    viewStateLiveData.value =
+                        MainViewState(notes = t.data as? List<Note>)
                 }
                 is NoteResult.Error -> {
-                    viewStateLiveData.value = MainViewState(error = t.error)
+                    viewStateLiveData.value =
+                        MainViewState(error = t.error)
                 }
             }
         }
